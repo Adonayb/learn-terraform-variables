@@ -5,9 +5,10 @@ terraform {
   #     name = "tf-vault-qa-AB"
   #   }
   # }
-  required_providers {
+   required_providers {
     aws = {
       source  = "hashicorp/aws"
+      version = "~> 3.76.0"
     }
   }
 }
@@ -126,8 +127,3 @@ module "ec2_instances" {
   }
 }
 
-module "s3_bucket" {
-  source  = "app.terraform.io/policy-as-code-training/s3-bucket-ab/aws"
-  version = "1.0.0"
-  bucket_name = "my-bucket-ab-0001"
-}
