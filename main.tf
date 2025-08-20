@@ -116,17 +116,17 @@ module "elb_http" {
 # main.tf
 
 # Use remote module from HCP Terraform
-# Temporarily modify the module call in main.tf
 module "ec2_instances" {
-  source  = "app.terraform.io/<Your-Org>/ec2-instance-tests-{your-initials}/aws"
-  version = "1.1.0"
+  source  = "app.terraform.io/policy-as-code-training/ec2-instance-tests-ab/aws"
+ version = "1.1.0"
 
-  instance_count     = var.instance_count
-  instance_type      = "t3.small"  # This will trigger validation error (must be t2.micro)
+  instance_count     = 2
+  instance_type      = "t2.micro"  # Valid value
   subnet_ids         = module.vpc.private_subnets[*]
   security_group_ids = [module.app_security_group.this_security_group_id]
 
   tags = {
-    environment = "dev"  # Missing project tag - this will trigger validation error
+    project     = "project-alpha"  # Valid value
+    environment = "dev"
   }
 }
